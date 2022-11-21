@@ -1,4 +1,4 @@
-resource "aws_security_group" "broker" {
+/*resource "aws_security_group" "broker" {
   description = "Managed by Terraform"
   egress {
     cidr_blocks = ["0.0.0.0/0"]
@@ -21,4 +21,4 @@ resource "aws_security_group" "broker" {
   name   = var.security_group_name
   vpc_id = var.vpc_id
   tags   = var.common_tags
-}
+}*/

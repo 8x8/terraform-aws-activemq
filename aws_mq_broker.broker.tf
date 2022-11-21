@@ -1,3 +1,7 @@
+data "aws_security_group" "cloud8-prod-amq" {
+  id = "sg-0b25d9def78191dda"
+}
+
 resource "aws_mq_broker" "broker" {
   broker_name = var.mq_broker["name"]
 
@@ -11,7 +15,7 @@ resource "aws_mq_broker" "broker" {
   host_instance_type  = var.mq_broker["host_instance_type"]
   deployment_mode     = var.mq_broker["deployment_mode"]
   publicly_accessible = var.mq_broker["publicly_accessible"]
-  security_groups     = [aws_security_group.broker.id]
+  security_groups     = [data.aws_security_group.cloud8-prod-amq.id]
 
   user {
     username = var.username
