@@ -71,3 +71,21 @@ variable "security_group_name" {
   default     = "Broker"
   description = "Broker Security group name"
 }
+
+/*variable "zone_id" {
+  type        = string
+  default     = "Z368M32STY6CPA"
+  description = "Route53 hosted zone ID"
+}
+
+variable "record_name_1" {
+  type        = string
+  default     = "amq-broker-1.tf.8x8.dev"
+  description = "Route53 record name"
+}
+
+variable "record_name_2" {
+  type        = string
+  default     = "amq-broker-2.tf.8x8.dev"
+  description = "Route53 record name"
+}*/
