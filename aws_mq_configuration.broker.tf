@@ -6,7 +6,7 @@ resource "aws_mq_configuration" "broker" {
 
   data = <<DATA
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<broker xmlns="http://activemq.apache.org/schema/core" schedulePeriodForDestinationPurge="10000">
+<broker schedulePeriodForDestinationPurge="10000" xmlns="http://activemq.apache.org/schema/core">
   <!--
   A configuration contains all of the settings for your ActiveMQ broker, in XML format (similar to ActiveMQ's activemq.xml file).
   You can create a configuration before creating any brokers. You can then apply the configuration to one or more brokers.
@@ -46,11 +46,9 @@ resource "aws_mq_configuration" "broker" {
   To instruct Amazon MQ to optimize for queues with slow consumers, set the concurrentStoreAndDispatchQueues attribute to false.
   For more information, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/ensuring-effective-amazon-mq-performance.html
   -->
-  <!--
   <persistenceAdapter>
-    <kahaDB  concurrentStoreAndDispatchQueues="false"/>
+    <kahaDB concurrentStoreAndDispatchQueues="false"/>
   </persistenceAdapter>
-  -->
   <destinationPolicy>
     <policyMap>
       <policyEntries>
@@ -62,7 +60,7 @@ resource "aws_mq_configuration" "broker" {
 
         For more information, see: http://activemq.apache.org/delete-inactive-destinations.html
         -->
-        <policyEntry topic="&gt;" gcInactiveDestinations="true" inactiveTimoutBeforeGC="600000">
+        <policyEntry gcInactiveDestinations="true" inactiveTimoutBeforeGC="600000" topic="&gt;">
           <!--
           The constantPendingMessageLimitStrategy is used to prevent
           slow topic consumers to block producers and affect other consumers
@@ -74,7 +72,7 @@ resource "aws_mq_configuration" "broker" {
             <constantPendingMessageLimitStrategy limit="1000"/>
           </pendingMessageLimitStrategy>
         </policyEntry>
-        <policyEntry queue="&gt;" gcInactiveDestinations="true" inactiveTimoutBeforeGC="600000" />
+        <policyEntry gcInactiveDestinations="true" inactiveTimoutBeforeGC="600000" queue="&gt;"/>
         <!--
         Destination policies let you configure a rich set of behaviors for your queues and topics.
         For more information, see http://activemq.apache.org/per-destination-policies.html
@@ -138,9 +136,7 @@ resource "aws_mq_configuration" "broker" {
     <!--
     The Force Persistency Mode plugin can override the persistency mode set on messages.
     -->
-    <!--
-    <forcePersistencyModeBrokerPlugin persistenceFlag="true"/>
-    -->
+    <forcePersistencyModeBrokerPlugin persistenceFlag="false"/>
     <!--
     The Redelivery plugin extends the capabilities of destination policies with respect to message redelivery.
     For more information, see http://activemq.apache.org/message-redelivery-and-dlq-handling.html
@@ -183,7 +179,7 @@ resource "aws_mq_configuration" "broker" {
   -->
   <!--
   <networkConnectors>
-    <networkConnector name="myNetworkConnector" userName="commonUser" uri="masterslave:(${aws_mq_broker.broker.instances.0.endpoints.0},${aws_mq_broker.broker.instances.1.endpoints.0})"/>
+    <networkConnector name="myNetworkConnector" userName="commonUser" uri="masterslave:(ssl://b-1a2b3c4d-1.mq.region.amazonaws.com:61617,ssl://b-1a2b3c4d-2.mq.region.amazonaws.com:61617)"/>
   </networkConnectors>
   -->
 </broker>
