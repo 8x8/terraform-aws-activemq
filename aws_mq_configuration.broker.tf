@@ -179,7 +179,7 @@ resource "aws_mq_configuration" "broker" {
   -->
   <!--
   <networkConnectors>
-    <networkConnector name="myNetworkConnector" userName="commonUser" uri="masterslave:(ssl://b-1a2b3c4d-1.mq.region.amazonaws.com:61617,ssl://b-1a2b3c4d-2.mq.region.amazonaws.com:61617)"/>
+    <networkConnector name="myNetworkConnector" userName="commonUser" uri="masterslave:(${aws_mq_broker.broker.instances.0.endpoints.0},${aws_mq_broker.broker.instances.0.endpoints.1})"/>
   </networkConnectors>
   -->
 </broker>
