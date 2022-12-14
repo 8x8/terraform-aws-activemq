@@ -1,10 +1,10 @@
 resource "aws_mq_broker" "broker" {
   broker_name = var.mq_broker["name"]
 
-  configuration {
+/*  configuration {
     id       = aws_mq_configuration.broker.id
     revision = aws_mq_configuration.broker.latest_revision
-  }
+  }*/
 
   engine_type         = var.mq_broker["engine_type"]
   engine_version      = var.mq_broker["engine_version"]
