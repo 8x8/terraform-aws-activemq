@@ -4,7 +4,7 @@ variable "common_tags" {
 }
 
 variable "mq_broker" {
-  type        = map
+  type        = any
   description = "MQ broker details"
 }
 
