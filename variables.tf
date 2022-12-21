@@ -61,6 +61,12 @@ variable "password" {
   description = ""
 }
 
+variable "console_access" {
+  type        = bool
+  description = "Grant or restrict access to the broker console"
+  default     = false
+}
+
 variable "ingress" {
   type    = list
   default = ["0.0.0.0/0"]
