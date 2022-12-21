@@ -16,6 +16,7 @@ resource "aws_mq_broker" "broker" {
   user {
     username = var.username
     password = var.password
+    console_access = var.console_access
   }
 
   maintenance_window_start_time {
